@@ -1,0 +1,16 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+  <meta charset="UTF-8">
+  <title>환영합니다</title>
+</head>
+<body>
+  <h1 id="welcomeMsg"></h1>
+
+  <script>
+    const name = localStorage.getItem("playerName");
+    const msg = name ? `${name}님 반가워요 😊` : "누구세요?";
+    document.getElementById('welcomeMsg').textContent = msg;
+  </script>
+</body>
+</html>
