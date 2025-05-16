@@ -1,11 +1,24 @@
 <!DOCTYPE html>
-<html>
+<html lang="ko">
 <head>
   <meta charset="UTF-8">
-  <title>리얼월드 퀘스트 시작</title>
+  <title>이름 입력</title>
 </head>
 <body>
-  <h1>🎉 GitHub Pages 배포 성공!</h1>
-  <p>이제 리얼월드 웹뷰 블록에서 이 페이지를 열 수 있습니다.</p>
+  <h2>당신의 이름을 입력하세요</h2>
+  <input type="text" id="username" placeholder="이름 입력">
+  <button onclick="saveAndGo()">확인</button>
+
+  <script>
+    function saveAndGo() {
+      const name = document.getElementById('username').value.trim();
+      if (name) {
+        localStorage.setItem("playerName", name);  // 저장
+        location.href = "greeting.html";
+      } else {
+        alert("이름을 입력해주세요!");
+      }
+    }
+  </script>
 </body>
 </html>
