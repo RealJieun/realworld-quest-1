@@ -1,0 +1,105 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+  <meta charset="UTF-8">
+  <title>BRIGHT 퍼즐</title>
+  <!-- Google Fonts: Cinzel (제목용) + 기본 Georgia -->
+  <link href="https://fonts.googleapis.com/css2?family=Cinzel&display=swap" rel="stylesheet">
+  <style>
+    body {
+      font-family: 'Georgia', serif;
+      text-align: center;
+      padding: 30px;
+      background-color: #f8f4f0;
+    }
+
+    h1 {
+      font-family: 'Cinzel', serif;
+      font-size: 32px;
+      color: #5c2e0d;
+      margin-bottom: 20px;
+    }
+
+    .grid {
+      display: grid;
+      grid-template-columns: repeat(4, 60px); /* 4열 × 6행 */
+      grid-gap: 10px;
+      justify-content: center;
+      margin-bottom: 20px;
+    }
+
+    .btn {
+      font-family: 'Georgia', serif;
+      padding: 15px;
+      font-size: 22px;
+      background-color: #D2B48C; /* 연한 갈색 */
+      color: white;
+      border: none;
+      border-radius: 6px;
+      cursor: pointer;
+      transition: background-color 0.2s, box-shadow 0.2s;
+      box-shadow: 2px 2px 6px rgba(0, 0, 0, 0.2);
+    }
+
+    .btn.clicked {
+      background-color: #B8860B; /* 눌림 효과 색상 */
+      box-shadow: none;
+    }
+
+    #result {
+      font-size: 24px;
+      font-weight: bold;
+      margin-top: 20px;
+      color: #5c2e0d;
+    }
+  </style>
+</head>
+<body>
+  <h1>Enter the correct code to proceed</h1>
+  <div class="grid" id="buttonGrid"></div>
+  <div id="result"></div>
+
+  <script>
+    const answer = ['B', 'R', 'I', 'G', 'H', 'T'];
+    let input = [];
+
+    function inputLetter(letter, btn) {
+      input.push(letter);
+      btn.classList.add("clicked");
+
+      const isCorrect = input.every((v, i) => v === answer[i]);
+
+      if (!isCorrect) {
+        document.getElementById('result').innerText = "다시 시도하세요";
+        input = [];
+        resetButtons();
+        return;
+      }
+
+      if (input.length === answer.length) {
+        document.getElementById('result').innerText = "정답입니다! 잠금 해제중";
+        window.open('https://sites.google.com/view/errgno1/%EB%AC%B8%EC%A0%9C4');
+        input = [];
+        resetButtons();
+      }
+    }
+
+    function resetButtons() {
+      const buttons = document.querySelectorAll(".btn");
+      buttons.forEach(btn => btn.classList.remove("clicked"));
+    }
+
+    // 알파벳 24개 (V, Z 제외)
+    const letters = 'ABCDEFGHIJKLMNOPQRSTUWXY'.split('');
+    const grid = document.getElementById('buttonGrid');
+
+    letters.forEach(letter => {
+      const btn = document.createElement('button');
+      btn.innerText = letter;
+      btn.className = 'btn';
+      btn.onclick = () => inputLetter(letter, btn);
+      grid.appendChild(btn);
+    });
+  </script>
+</body>
+</html>
